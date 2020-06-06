@@ -1,0 +1,5 @@
+/classifier/.idea
+/classifier/__pycache__
+/classifier/data
+/classifier/logs
+/classifier/models
