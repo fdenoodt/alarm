@@ -3,3 +3,5 @@
 /classifier/data
 /classifier/logs
 /classifier/models
+classifier/audio.mp3
+classifier/audio.wav
