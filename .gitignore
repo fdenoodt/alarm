@@ -5,3 +5,7 @@
 /classifier/models
 classifier/audio.mp3
 classifier/audio.wav
+classifier/backend/.idea/*
+classifier/backend/__pycache__/*
+classifier/backend/img.jpg
+classifier/backend/img.jpg
