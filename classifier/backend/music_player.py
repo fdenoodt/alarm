@@ -1,21 +1,58 @@
-﻿import pygame
+﻿from sys import platform
+
+
+def is_linux():
+    return platform == 'linux' or platform == 'linux2' or platform == 'darwin'
+
+
+if is_linux():
+    import pygame
+else:
+    import winsound
 
 
 class MusicPlayer():
-    def __init__(self):
-        self.p = None
-        self.is_playing = False
+    p = None
+    is_playing = False
+    audio_file = 'audio/audio.wav'
 
-    def play(self):
-        if not self.is_playing:
-            print("Playing music...")
-            pygame.init()
-            pygame.mixer.music.load('audio/audio.mp3')
-            pygame.mixer.music.play()
-            self.is_playing = True
+    @staticmethod
+    def play():
+        if not MusicPlayer.is_playing:
+            if is_linux():
+                MusicPlayer.play_on_linux()
+            else:
+                MusicPlayer.play_on_windows()
 
-    def stop(self):
-        if self.is_playing:
+            MusicPlayer.is_playing = True
+
+    @staticmethod
+    def stop():
+        if MusicPlayer.is_playing:
             print("Stopping music...")
-            pygame.mixer.music.stop()
-            self.is_playing = False
+            if is_linux():
+                MusicPlayer.stop_on_linux()
+            MusicPlayer.is_playing = False
+
+    @staticmethod
+    def play_on_linux():
+        print('Playing music linux...')
+
+        pygame.init()
+        pygame.mixer.music.load(MusicPlayer.audio_file)
+        pygame.mixer.music.play()
+
+    @staticmethod
+    def play_on_windows():
+        print('playing music windows...')
+        winsound.PlaySound(MusicPlayer.audio_file, winsound.SND_ASYNC)
+
+    @staticmethod
+    def stop_on_linux():
+        print('stopping music linux...')
+        pygame.mixer.music.stop()
+
+    @staticmethod
+    def stop_on_windows():
+        print('stopping music windows...')
+        winsound.PlaySound(None, winsound.SND_PURGE)

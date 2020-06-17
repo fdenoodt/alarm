@@ -3,7 +3,7 @@ class Calculator:
     print("cool")
 
     @staticmethod
-    def addNumbers():
+    def add_numbers():
         return Calculator.ik
 
 

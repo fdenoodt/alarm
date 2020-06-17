@@ -8,4 +8,4 @@ classifier/audio.wav
 classifier/backend/.idea/*
 classifier/backend/__pycache__/*
 classifier/backend/img.jpg
-classifier/backend/img.jpg
+classifier/backend/config.json
