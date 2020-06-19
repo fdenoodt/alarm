@@ -16,6 +16,9 @@ class Alarm():
         self.camera = Camera()
         self.model = Model()
 
+        # for storing images
+        self.counter = 0
+
     def set_alarm(self, hour, minute):
         self.hour = hour
         self.minute = minute
@@ -26,17 +29,20 @@ class Alarm():
         minute = int(d.minute)
 
         if self.in_time_window(hour, minute):
-            if self.verify_present():
+            is_present, image = self.verify_present()
+            if is_present:
                 self.launch_alarm()
             else:
                 self.stop_alarm()
+
+            self.store_image(image)
 
     def verify_present(self):
         image = Camera.capture_screenshot()
         prediction = self.model.predict(image)
 
         print("Predicted: {}".format(prediction))
-        return prediction == 0
+        return prediction == 0, image
 
     def in_time_window(self, curr_hour, curr_minute):
         if self.hour is None or self.minute is None:
@@ -52,3 +58,10 @@ class Alarm():
 
     def stop_alarm(self):
         self.music_player.stop()
+
+    def store_image(self, image):
+        # activates once every 3 iterations
+        self.counter = self.counter + 1
+        if self.counter >= 2:
+            self.counter = 0
+            Camera.save_image(image)
