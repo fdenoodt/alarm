@@ -2,6 +2,7 @@
 from flask import Flask, request
 from alarm import Alarm
 from set_interval import SetInterval
+from config_manager import ConfigManager
 
 app = Flask(__name__)
 alarm = Alarm()
@@ -31,7 +32,10 @@ def init():
     t = SetInterval(2, tick)
     t.start()
 
-    app.run()
+    if ConfigManager.get_config()['production'] == 'True':
+        app.run(host='0.0.0.0')
+    else:
+        app.run()
 
 
 init()
