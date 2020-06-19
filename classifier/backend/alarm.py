@@ -2,6 +2,7 @@
 from music_player import MusicPlayer
 from camera import Camera
 from model import Model
+from config_manager import ConfigManager
 
 
 class Alarm():
@@ -9,7 +10,7 @@ class Alarm():
         self.hour = None
         self.minute = None
         self.time_window_hours = 0
-        self.time_window_minutes = 1  # seconds
+        self.time_window_minutes = ConfigManager.get_config()['minutes_to_check']
 
         self.music_player = MusicPlayer()
         self.camera = Camera()
@@ -31,7 +32,7 @@ class Alarm():
                 self.stop_alarm()
 
     def verify_present(self):
-        image = self.camera.capture_screenshot()
+        image = Camera.capture_screenshot()
         prediction = self.model.predict(image)
 
         print("Predicted: {}".format(prediction))

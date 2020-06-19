@@ -1,4 +1,5 @@
 ﻿from sys import platform
+from config_manager import ConfigManager
 
 
 def is_linux():
@@ -14,7 +15,7 @@ else:
 class MusicPlayer():
     p = None
     is_playing = False
-    audio_file = 'audio/audio.wav'
+    audio_file = ConfigManager.get_config()['audio_file']
 
     @staticmethod
     def play():

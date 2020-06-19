@@ -17,7 +17,7 @@ def reshape(images):
 
 
 def predict():
-    im = cv2.imread('img.jpg')
+    im = cv2.imread('simulation/out.jpg')
     image = resize(im)
     image = reshape(image)
 

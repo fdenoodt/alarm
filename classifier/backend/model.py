@@ -1,5 +1,6 @@
 import tensorflow as tf
 from transform_image import reshape
+from config_manager import ConfigManager
 
 
 class Model():
@@ -8,7 +9,7 @@ class Model():
         self.session = tf.Session(graph=tf.Graph())
         with self.session.graph.as_default():
             tf.keras.backend.set_session(self.session)
-            self.model = tf.keras.models.load_model('./model/model.model')
+            self.model = tf.keras.models.load_model(ConfigManager.get_config()['model'])
 
     '''
     0 = In bed, 1 = Out of bed
