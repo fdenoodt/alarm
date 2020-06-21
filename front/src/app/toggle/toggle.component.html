@@ -1,5 +1,5 @@
 <label class="switch">
-  <input type="checkbox" [(ngModel)]="active">
+  <input type="checkbox" [(ngModel)]="active" (change)="toggleVisibility()">
   <span class="slider"></span>
 </label>
 <br>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'tile',
@@ -9,9 +9,15 @@ export class TileComponent implements OnInit {
 
   @Input() value: number
   @Input() type: string
+  @Output() onClick: EventEmitter<{ number, type }> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  select() {
+    this.onClick.emit({ number: this.value, type: this.type });
   }
 
 }

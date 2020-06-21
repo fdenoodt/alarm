@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 .container {
@@ -19,4 +20,12 @@ table {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.time {
+  font-weight: bold;
+  font-size: 6em;
+  // background-color: var(--blue);
+  // color: var(--bright-text);
+  // width: calc(6.5rem * 6);
 }
