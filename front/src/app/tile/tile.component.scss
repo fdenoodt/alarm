@@ -1,0 +1,31 @@
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 5em;
+  font-weight: bold;
+
+  width: 6.5rem;
+  height: 6.5rem;
+
+  color: var(--dark-text);
+}
+
+.hour {
+  background-color: var(--green);
+}
+
+.minute {
+  background-color: var(--yellow);
+}
+
+.hour:hover {
+  background-color: var(--green-accent);
+  color: var(--bright-text);
+}
+
+.minute:hover {
+  background-color: var(--yellow-accent);
+  color: var(--bright-text);
+}

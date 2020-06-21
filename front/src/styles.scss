@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --yellow: rgb(252, 218, 128);
+  --yellow-accent: rgb(226, 195, 113);
+
+  --red: rgb(187, 100, 109);
+  --red-accent: rgb(168, 91, 99);
+
+  --blue: rgb(82, 123, 143);
+  --blue-accent: rgb(73, 109, 131);
+
+  --green: rgb(158, 225, 194);
+  --green-accent: rgb(141, 201, 175);
+
+  --dark-text: rgb(75, 75, 75);
+  --bright-text: rgb(255, 255, 255);
+}
+
+body {
+  font-family: "Tw Cen MT";
+}

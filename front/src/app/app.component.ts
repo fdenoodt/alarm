@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,4 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  minutes = []
+  hours = []
+
+  constructor() {
+
+    // Set up hour options
+    for (let i = 0; i < 12; i++) {
+      this.minutes.push(i * 5)
+      this.hours.push(i + 1)
+    }
+  }
+
 }
