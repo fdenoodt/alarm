@@ -12,6 +12,10 @@
   color: var(--dark-text);
 }
 
+.tile:hover {
+  cursor: pointer;
+}
+
 .hour {
   background-color: var(--green);
 }

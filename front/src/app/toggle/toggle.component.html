@@ -1,0 +1,9 @@
+<label class="switch">
+  <input type="checkbox" [(ngModel)]="active">
+  <span class="slider"></span>
+</label>
+<br>
+<div class="state">
+  <span *ngIf="active">PM</span>
+  <span *ngIf="!active">AM</span>
+</div>
