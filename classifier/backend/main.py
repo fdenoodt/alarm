@@ -1,10 +1,14 @@
 ﻿import logging
 from flask import Flask, request
+from flask_cors import CORS
 from alarm import Alarm
+
 from set_interval import SetInterval
 from config_manager import ConfigManager
 
 app = Flask(__name__)
+CORS(app)
+
 alarm = Alarm()
 
 
@@ -17,7 +21,10 @@ def set_alarm():
     logging.basicConfig(level=logging.DEBUG)
 
     if request.method == 'GET':
-        return '{}:{}'.format(alarm.hour, alarm.minute)
+        return {
+            'hour': alarm.hour,
+            'minute': alarm.minute
+        }
 
     if request.method == 'POST':
         hour = int(request.form.get("hour", None))
@@ -25,7 +32,10 @@ def set_alarm():
 
         alarm.set_alarm(hour, minute)
 
-        return 'alarm set'
+        return {
+            'hour': hour,
+            'minute': minute
+        }
 
 
 def init():
