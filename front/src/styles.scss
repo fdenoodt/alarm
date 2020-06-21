@@ -1,4 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: tw;
+  src: url(assets/font.TTF) format("opentype");
+}
+
 :root {
   --yellow: rgb(252, 218, 128);
   --yellow-accent: rgb(226, 195, 113);
@@ -18,7 +23,7 @@
 
 body {
   color: var(--dark-text);
-  font-family: "Tw Cen MT";
+  font-family: "Tw Cen MT", "tw";
   margin: 0;
   padding: 0;
 }
