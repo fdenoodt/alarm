@@ -1,5 +1,5 @@
 ﻿import logging
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 from alarm import Alarm
 
@@ -21,21 +21,16 @@ def set_alarm():
     logging.basicConfig(level=logging.DEBUG)
 
     if request.method == 'GET':
-        return {
-            'hour': alarm.hour,
-            'minute': alarm.minute
-        }
+        return jsonify(hour=alarm.hour,
+                       minute=alarm.minute)
 
     if request.method == 'POST':
         hour = int(request.form.get("hour", None))
         minute = int(request.form.get("minute", None))
 
         alarm.set_alarm(hour, minute)
-
-        return {
-            'hour': hour,
-            'minute': minute
-        }
+        return jsonify(hour=hour,
+                       minute=minute)
 
 
 def init():
