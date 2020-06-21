@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TileComponent } from './tile/tile.component';
 import { ToggleComponent } from './toggle/toggle.component';
+import { AlarmService } from './services/alarm-service/alarm.service'
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,8 +18,9 @@ import { ToggleComponent } from './toggle/toggle.component';
     BrowserModule,
     FlexLayoutModule,
     FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [AlarmService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

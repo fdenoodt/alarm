@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlarmService } from './services/alarm-service/alarm.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent {
   selectedHour: number = 9
   selectedMinute: number = 0
 
-  constructor() {
+  constructor(private alarmService: AlarmService) {
     // Set up hour options
     for (let i = 0; i < 12; i++) {
       this.minutes.push(i * 5)
@@ -21,10 +22,26 @@ export class AppComponent {
     }
   }
 
+  ngOnInit() {
+    this.alarmService.getTime().subscribe(
+      time => {
+        this.selectedHour = time.hour ?? 0
+        this.selectedMinute = time.minute ?? 0
+      },
+      err => alert("Error")
+    )
+  }
+
+  setTime() {
+    this.alarmService.setTime({ hour: this.selectedHour, minute: this.selectedMinute }).subscribe(
+      _ => { },
+      err => alert("Error"))
+  }
+
   stateChanged(isActive) {
     this.pm = isActive
-
     this.selectedHour = this.adaptToPM(this.pm, this.selectedHour)
+    this.setTime()
   }
 
   timeSelected(data: { number, type }) {
@@ -35,6 +52,7 @@ export class AppComponent {
       number = this.adaptToPM(this.pm, number)
 
     type == 'hour' ? this.selectedHour = number : this.selectedMinute = number
+    this.setTime()
   }
 
   adaptToPM(isPM: boolean, selectedHour: number): number {
