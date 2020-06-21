@@ -24,21 +24,38 @@ export class AppComponent {
   stateChanged(isActive) {
     this.pm = isActive
 
-    if (this.pm && this.selectedHour)
-      this.selectedHour += 12
-    else
-      this.selectedHour -= 12
-
+    this.selectedHour = this.adaptToPM(this.pm, this.selectedHour)
   }
 
   timeSelected(data: { number, type }) {
     let number: number = parseInt(data.number)
     const type = data.type
 
-    if (this.pm && type == 'hour')
-      number += 12
+    if (type == 'hour')
+      number = this.adaptToPM(this.pm, number)
 
     type == 'hour' ? this.selectedHour = number : this.selectedMinute = number
+  }
+
+  adaptToPM(isPM: boolean, selectedHour: number): number {
+    let hour = selectedHour
+
+    if (isPM) {
+      if (hour < 12) {
+        hour += 12
+      }
+      else if (hour == 12) {
+        hour = 0
+      }
+
+    } else {
+      if (hour > 12)
+        hour -= 12
+      else if (hour == 0)
+        hour = 12
+    }
+
+    return hour
   }
 
 
