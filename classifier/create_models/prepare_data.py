@@ -46,18 +46,18 @@ for features, label in training_data:
     xs.append(features)
     ys.append(label)
 
-xs = transform_image.reshape(xs, IMAGE_W, IMAGE_H)
+xs = transform_image.reshape(xs)
 
 ##
 
 # Save images
 import pickle
 
-pickle_out = open("../data/X3.pickle", "wb")
+pickle_out = open("../data/X4.pickle", "wb")
 pickle.dump(xs, pickle_out)
 pickle_out.close()
 
-pickle_out = open("../data/Y3.pickle", "wb")
+pickle_out = open("../data/Y4.pickle", "wb")
 pickle.dump(ys, pickle_out)
 pickle_out.close()
 

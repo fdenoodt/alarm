@@ -11,3 +11,8 @@ classifier/backend/img.jpg
 classifier/backend/config.json
 classifier/backend/simulation/*
 
+*.iml
+*.xml
+*.MSI
+*.profile-empty
+*.trace
