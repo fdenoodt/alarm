@@ -20,6 +20,7 @@ class Alarm():
         self.counter = 0
 
     def set_alarm(self, hour, minute):
+        self.stop_alarm()
         self.hour = hour
         self.minute = minute
 
