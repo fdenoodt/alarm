@@ -41,7 +41,7 @@ class MusicPlayer():
 
         pygame.init()
         pygame.mixer.music.load(MusicPlayer.audio_file)
-        pygame.mixer.music.play(-1)  # -1 for continous loop
+        pygame.mixer.music.play(-1)  # -1 for continuous loop
 
     @staticmethod
     def play_on_windows():
