@@ -5,10 +5,6 @@ import random
 
 DATA_DIR = '../data/'
 LABELS = ['in', 'out']
-# IMAGE_W = 440
-# IMAGE_H = 380
-# IMAGE_W = 640
-# IMAGE_H = 480
 
 IMAGE_W = 352
 IMAGE_H = 352
@@ -20,7 +16,6 @@ for label in LABELS:
     path = os.path.join(DATA_DIR, label)
     for im in os.listdir(path):
         im_arr = imread(os.path.join(path, im), IMREAD_COLOR)
-        # im_arr = transform_image.crop(im_arr)
         im_arr = transform_image.resize(im_arr)
         training_data.append([im_arr, LABELS.index(label)])
 
@@ -29,9 +24,16 @@ for label in LABELS:
 # Spread data evenly
 ins = list(filter(lambda x: x[1] == LABELS.index('in'), training_data))
 outs = list(filter(lambda x: x[1] == LABELS.index('out'), training_data))
-target_length = len(outs)
+
+target_length = len(outs) if len(outs) < len(ins) else len(ins)
+
 random.shuffle(ins)
+random.shuffle(outs)
+
+# todo: try with less data
 ins = ins[:target_length]
+outs = outs[:target_length]
+
 training_data = outs
 training_data.extend(ins)
 
@@ -53,11 +55,11 @@ xs = transform_image.reshape(xs)
 # Save images
 import pickle
 
-pickle_out = open("../data/X4.pickle", "wb")
+pickle_out = open("../data/X5.pickle", "wb")
 pickle.dump(xs, pickle_out)
 pickle_out.close()
 
-pickle_out = open("../data/Y4.pickle", "wb")
+pickle_out = open("../data/Y5.pickle", "wb")
 pickle.dump(ys, pickle_out)
 pickle_out.close()
 
