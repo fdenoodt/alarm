@@ -20,9 +20,9 @@ class Alarm():
         self.counter = 0
 
     def set_alarm(self, hour, minute):
-        self.stop_alarm()
         self.hour = hour
         self.minute = minute
+        self.stop_alarm()
 
     def verify_alarm(self):
         d = datetime.now()
