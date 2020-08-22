@@ -30,9 +30,9 @@ target_length = len(outs) if len(outs) < len(ins) else len(ins)
 random.shuffle(ins)
 random.shuffle(outs)
 
-# todo: try with less data
-ins = ins[:target_length]
-outs = outs[:target_length]
+percent_data = 0.3  # 30%
+ins = ins[:int(target_length * percent_data)]
+outs = outs[:int(target_length * percent_data)]
 
 training_data = outs
 training_data.extend(ins)
@@ -52,14 +52,14 @@ xs = transform_image.reshape(xs)
 
 ##
 
-# Save images
 import pickle
 
-pickle_out = open("../data/X5.pickle", "wb")
+# Save images
+pickle_out = open("../data/X7.pickle", "wb")
 pickle.dump(xs, pickle_out)
 pickle_out.close()
 
-pickle_out = open("../data/Y5.pickle", "wb")
+pickle_out = open("../data/Y7.pickle", "wb")
 pickle.dump(ys, pickle_out)
 pickle_out.close()
 
