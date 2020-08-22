@@ -2,7 +2,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from alarm import Alarm
-
+from datetime import datetime
 from set_interval import SetInterval
 from config_manager import ConfigManager
 
@@ -31,6 +31,17 @@ def set_alarm():
         alarm.set_alarm(hour, minute)
         return jsonify(hour=hour,
                        minute=minute)
+
+
+@app.route('/time', methods=['GET'])
+def get_time():
+    logging.basicConfig(level=logging.DEBUG)
+    d = datetime.now()
+    hour = d.hour
+    minute = d.minute
+    
+    return jsonify(hour=hour, 
+                   minute=minute)
 
 
 def init():
