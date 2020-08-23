@@ -16,3 +16,4 @@ classifier/backend/simulation/*
 *.MSI
 *.profile-empty
 *.trace
+classifier/create_models/hash.py
