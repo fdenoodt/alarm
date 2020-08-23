@@ -19,6 +19,8 @@
 
   --dark-text: rgb(75, 75, 75);
   --bright-text: rgb(255, 255, 255);
+  
+  --dark-background: rgb(95, 95, 95);
 }
 
 body {
@@ -26,5 +28,5 @@ body {
   font-family: "Tw Cen MT", "tw";
   margin: 0;
   padding: 0;
-  background-color: var(--dark-text);
+  background-color: var(--dark-background);
 }
