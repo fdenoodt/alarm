@@ -43,7 +43,7 @@ class Alarm():
         prediction = self.model.predict(image)
 
         print("Predicted: {}".format(prediction))
-        return prediction == 0, image
+        return prediction < 0.5, image
 
     def in_time_window(self, curr_hour, curr_minute):
         if self.hour is None or self.minute is None:
