@@ -39,7 +39,8 @@ class Camera:
     def save_image(image):
         save_path = ConfigManager.get_config()['save_image_path']
         if len(save_path) > 0:  # no logging needed otherwise
-            count = len(os.listdir(save_path)) + 3  # + 3 just to be sure
+            skip = ConfigManager.get_config()['skip_image_count']
+            count = len(os.listdir(save_path)) + skip
 
             now = datetime.datetime.now()
             file_name = '{}_{}_{}_{}_{}_{}'.format(now.year, now.month, now.day, now.hour, now.minute, now.second)
