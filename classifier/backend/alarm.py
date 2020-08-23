@@ -49,6 +49,11 @@ class Alarm:
         if self.hour is None or self.minute is None:
             return False
 
+        if curr_hour is None or curr_minute is None:
+            d = datetime.now()
+            curr_hour = int(d.hour)
+            curr_minute = int(d.minute)
+
         # Compare hour
         after_alarm = self.hour < curr_hour
 

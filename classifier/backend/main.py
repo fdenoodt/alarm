@@ -39,9 +39,16 @@ def get_time():
     d = datetime.now()
     hour = d.hour
     minute = d.minute
-    
-    return jsonify(hour=hour, 
+
+    return jsonify(hour=hour,
                    minute=minute)
+
+
+@app.route('/inTimeWindow', methods=['GET'])
+def get_in_time_window():
+    logging.basicConfig(level=logging.DEBUG)
+    in_time = alarm.in_time_window(None, None)
+    return jsonify(inTimeWindow=in_time)
 
 
 def init():
