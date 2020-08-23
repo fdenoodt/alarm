@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
+import { Observable, throwError } from 'rxjs'
 import { HttpClient } from '@angular/common/http'
 import { mergeMap } from 'rxjs/operators'
 
@@ -36,38 +36,41 @@ export class AlarmService {
   }
 
   setTime(time: { hour, minute }): Observable<any> {
+    return this.inTimeWindow()
+      .pipe(
+        mergeMap((response: { inTimeWindow: boolean }) => {
+          if (response.inTimeWindow)
+            return throwError("Can not change time while in time window!")
 
-    return this.getServerTime().pipe(
-      mergeMap((serverTime: { hour, minute }) => {
-        const difference = this.difference(serverTime)
-        let hour = time.hour + difference.hour
-        let minute = time.minute + difference.minute
+          return this.getServerTime().pipe(
+            mergeMap((serverTime: { hour, minute }) => {
+              const difference = this.difference(serverTime)
+              let hour = time.hour + difference.hour
+              let minute = time.minute + difference.minute
 
-        console.log(difference);
-        console.log(hour);
-        console.log(minute);
+              if (hour > 23)
+                hour = hour - 24
+              if (minute > 59)
+                minute = minute - 60
 
+              if (hour < 0)
+                hour = hour + 24
+              if (minute < 0)
+                minute = minute + 60
 
-        if (hour > 23)
-          hour = hour - 24
-        if (minute > 59)
-          minute = minute - 60
+              const formData = new FormData();
+              formData.append('hour', hour);
+              formData.append('minute', minute);
 
-        if (hour < 0)
-          hour = hour + 24
-        if (minute < 0)
-          minute = minute + 60
+              return this.http.post<{ hour: number, minute: number }>(this.url, formData)
+            })
+          )
+        })
+      )
+  }
 
-        const formData = new FormData();
-        formData.append('hour', hour);
-        formData.append('minute', minute);
-
-        return this.http.post<{ hour, minute }>(this.url, formData)
-      })
-    )
-
-
-
+  inTimeWindow(): Observable<{ inTimeWindow: boolean }> {
+    return this.http.get<{ inTimeWindow: boolean }>(`${this.url}/inTimeWindow`)
   }
 
 }

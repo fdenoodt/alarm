@@ -35,7 +35,7 @@ export class AppComponent {
   setTime() {
     this.alarmService.setTime({ hour: this.selectedHour, minute: this.selectedMinute }).subscribe(
       _ => { },
-      err => alert("Error"))
+      err => alert(err))
   }
 
   stateChanged(isActive) {
