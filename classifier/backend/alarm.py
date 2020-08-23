@@ -5,11 +5,11 @@ from model import Model
 from config_manager import ConfigManager
 
 
-class Alarm():
+class Alarm:
     def __init__(self):
         self.hour = None
         self.minute = None
-        self.time_window_hours = 0
+        self.time_window_hours = ConfigManager.get_config()['hours_to_check']
         self.time_window_minutes = ConfigManager.get_config()['minutes_to_check']
 
         self.music_player = MusicPlayer()
@@ -49,9 +49,20 @@ class Alarm():
         if self.hour is None or self.minute is None:
             return False
 
-        after_alarm = self.hour <= curr_hour and self.minute <= curr_minute
-        before_wind_end = self.hour + self.time_window_hours >= curr_hour and \
-                          self.minute + self.time_window_minutes >= curr_minute
+        after_alarm = self.hour <= curr_hour and \
+                      self.minute <= curr_minute
+
+        target_hour = self.hour + self.time_window_hours
+        target_minute = self.minute + self.time_window_minutes
+
+        # Compare hour
+        before_wind_end = curr_hour < target_hour
+
+        # Compare minute if needed
+        if not before_wind_end:
+            before_wind_end = curr_hour == target_hour and \
+                              curr_minute <= target_minute
+
         return after_alarm and before_wind_end
 
     def launch_alarm(self):
