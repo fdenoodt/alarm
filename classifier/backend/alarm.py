@@ -49,8 +49,13 @@ class Alarm:
         if self.hour is None or self.minute is None:
             return False
 
-        after_alarm = self.hour <= curr_hour and \
-                      self.minute <= curr_minute
+        # Compare hour
+        after_alarm = self.hour < curr_hour
+
+        # CCompare minute if needed
+        if not after_alarm:
+            after_alarm = self.hour == curr_hour and \
+                          self.minute <= curr_minute
 
         target_hour = self.hour + self.time_window_hours
         target_minute = self.minute + self.time_window_minutes
