@@ -27,6 +27,8 @@ class Camera:
             image = cv2.imdecode(data, cv2.IMREAD_COLOR)
             image = resize(image)
 
+            image = image / 255.0
+
             Camera.camera.stop_preview()
         else:
             im_path = ConfigManager.get_config()['test_image_path']
