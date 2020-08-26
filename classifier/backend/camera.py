@@ -2,7 +2,7 @@
 import io
 import numpy as np
 import cv2
-from transform_image import resize
+from transform_image import resize, reshape
 import os
 import datetime
 
@@ -25,15 +25,16 @@ class Camera:
 
             data = np.fromstring(stream.getvalue(), dtype=np.uint8)
             image = cv2.imdecode(data, cv2.IMREAD_COLOR)
-            image = resize(image)
-
-            image = image / 255.0
 
             Camera.camera.stop_preview()
         else:
             im_path = ConfigManager.get_config()['test_image_path']
-            im = cv2.imread(im_path)
-            image = resize(im)
+            image = cv2.imread(im_path)
+
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        image = resize(image)
+        image = reshape(image)
+        image = image / 255.0
 
         return image
 
