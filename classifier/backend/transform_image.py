@@ -15,5 +15,5 @@ def resize(image):
 
 
 def reshape(images):
-    xs = np.array(images).reshape(-1, IMAGE_W, IMAGE_H, 3)
+    xs = np.array(images).reshape(-1, IMAGE_W, IMAGE_H, 1)
     return xs
