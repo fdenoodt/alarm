@@ -3,7 +3,7 @@ from transform_image import reshape
 from config_manager import ConfigManager
 
 
-class Model():
+class Model:
     def __init__(self):
         # https://github.com/keras-team/keras/issues/5640
         self.session = tf.Session(graph=tf.Graph())

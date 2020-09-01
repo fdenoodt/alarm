@@ -3,6 +3,7 @@ from music_player import MusicPlayer
 from camera import Camera
 from model import Model
 from config_manager import ConfigManager
+from transform_image import prepare_for_prediction
 
 
 class Alarm:
@@ -40,7 +41,8 @@ class Alarm:
 
     def verify_present(self):
         image = Camera.capture_screenshot()
-        prediction = self.model.predict(image)
+        predictable_image = prepare_for_prediction(image)
+        prediction = self.model.predict(predictable_image)
 
         print("Predicted: {}".format(prediction))
         return prediction < 0.5, image

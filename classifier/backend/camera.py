@@ -31,11 +31,6 @@ class Camera:
             im_path = ConfigManager.get_config()['test_image_path']
             image = cv2.imread(im_path)
 
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        image = resize(image)
-        image = reshape(image)
-        image = image / 255.0
-
         return image
 
     @staticmethod
