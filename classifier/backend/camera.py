@@ -34,14 +34,16 @@ class Camera:
         return image
 
     @staticmethod
-    def save_image(image):
+    def save_image(image, reason='automatic'):
         save_path = ConfigManager.get_config()['save_image_path']
-        if len(save_path) > 0:  # no logging needed otherwise
-            skip = ConfigManager.get_config()['skip_image_count']
-            count = len(os.listdir(save_path)) + skip
+        if reason == ('automatic' and not ConfigManager.get_config()['automatic_save']) or len(save_path) == 0:
+            return
 
-            now = datetime.datetime.now()
-            file_name = '{}_{}_{}_{}_{}_{}'.format(now.year, now.month, now.day, now.hour, now.minute, now.second)
+        skip = ConfigManager.get_config()['skip_image_count']
+        count = len(os.listdir(save_path)) + skip
 
-            file_path_name = '{}image{}_{}.jpg'.format(save_path, count, file_name)
-            cv2.imwrite(file_path_name, image)
+        now = datetime.datetime.now()
+        file_name = '{}_{}_{}_{}_{}_{}'.format(now.year, now.month, now.day, now.hour, now.minute, now.second)
+
+        file_path_name = '{}image{}_{}.jpg'.format(save_path, count, file_name)
+        cv2.imwrite(file_path_name, image)

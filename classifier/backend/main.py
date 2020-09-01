@@ -56,7 +56,7 @@ def add_screenshot():
     success = None
     try:
         im = alarm.camera.capture_screenshot()
-        alarm.camera.save_image(im)
+        alarm.camera.save_image(im, reason='requested')
         success = True
         print("Screenshot taken")
     except Exception:  # This must verify whether the PiCamera is not in use
