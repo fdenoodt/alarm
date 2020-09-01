@@ -51,6 +51,20 @@ def get_in_time_window():
     return jsonify(inTimeWindow=in_time)
 
 
+@app.route('/screenshot', methods=['POST'])
+def add_screenshot():
+    success = None
+    try:
+        im = alarm.camera.capture_screenshot()
+        alarm.camera.save_image(im)
+        success = True
+        print("Screenshot taken")
+    except Exception:  # This must verify whether the PiCamera is not in use
+        success = False
+    finally:
+        return jsonify(success=success)
+
+
 def init():
     t = SetInterval(2, tick)
     t.start()
