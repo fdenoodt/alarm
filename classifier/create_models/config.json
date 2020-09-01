@@ -1,0 +1,42 @@
+{
+  "data": {
+    "version": 17,
+    "image_width": 352,
+    "image_height": 352,
+    "remove_duplicates": true,
+    "spread_evenly": false,
+    "test_split": 0.1,
+    "validation_split": 0.2
+  },
+  "model": {
+    "name": "128x3-es-no_pill",
+    "conv_layers": [
+      {
+        "conv2d": {
+          "filter": 128,
+          "kernel_size": 3
+        },
+        "activation": "relu",
+        "pool_size": 2,
+        "dropout": 0.5
+      },
+      {
+        "conv2d": {
+          "filter": 128,
+          "kernel_size": 3
+        },
+        "activation": "relu",
+        "pool_size": 4,
+        "dropout": 0.5
+      }
+    ],
+    "early_stopping": {
+      "monitor": "val_loss",
+      "mode": "min",
+      "patience": 2,
+      "verbose": 1
+    },
+    "batch_size": 12,
+    "epochs": 10
+  }
+}
