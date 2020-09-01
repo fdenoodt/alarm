@@ -17,3 +17,4 @@ classifier/backend/simulation/*
 *.profile-empty
 *.trace
 classifier/create_models/hash.py
+*.DESKTOP-*
